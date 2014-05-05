@@ -1,0 +1,12 @@
+php
+mysql
+java
+sOlr
+redis
+php with libraries wurfl
+apache web server
+tomcat
+ices
+icecast
+wowza
+ffmpeg
