@@ -1,0 +1,4 @@
+http://developer.nokia.com/community/wiki/Audio/Video_streaming_Codecs_and_Protocols
+
+
+http://developer.android.com/guide/appendix/media-formats.html
