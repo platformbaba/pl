@@ -2,3 +2,4 @@ http://developer.nokia.com/community/wiki/Audio/Video_streaming_Codecs_and_Proto
 
 
 http://developer.android.com/guide/appendix/media-formats.html
+https://trac.ffmpeg.org/wiki/CompilationGuide/Centos
