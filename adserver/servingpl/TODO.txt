@@ -1,0 +1,20 @@
+
+
+
+Complete front end 
+	login advertiser specific.
+	adding constraints on ads.
+	reporting graphs ( ajax based ). last thing on sunday
+
+
+rewrite aduploader
+
+revisit adserver
+
+
+if possible write android app jar to include in apps that will override 
+	
+
+
+
+	
