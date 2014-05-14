@@ -1,0 +1,13 @@
+URLToken package for PHP
+
+version 1.1.2 (1/20/2006):
+	* Added README and ChangeLog
+	* Added function comments
+	* Simplified the _unHex function
+
+version 1.1.1 (10/24/2005):
+	* Simplified type checking
+	* Added length check for $sParam (to match Akamai-side constraints)
+
+version 1.1 (10/12/2005):
+	* Initial PHP version
