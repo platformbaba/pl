@@ -9,6 +9,46 @@ CDS go live
 CMS (with Amit)
 
 
+***********************************
 
+1. Setup Wowza for on-demand and live audio/video streaming along with Icecast
+
+	-- 30th May
+
+2. Create a script (PHP or Java) for downloading a digital content by id and type of content). The script need to validate the download 
+for payment, understand the user-agent and accordingly facilitate download in the required format
+
+	-- 30th May
+
+3. Create a CMS where one can upload digital content (audio, video, pdf, wallpaper, games, etc), deploy content to another destination through
+APIs and serve fron-end applications like Web page, WAP page or mobile app. basically DAMS+CDS+Template Engine+SaregamaCMS
+This will require LAMP, Tomcat+solr, Redis. Radio
+
+	-- 4th June( with search/radio integrated )
+
+
+4. Create ad serving mechanism. Should contain interface for creating campaigns, ads, rules, etc. Should be able to serve ads based on rules
+(no. of impressions, time, location, user-agent), reporting, etc. The ad should be either server on the page/screen or in-stream.
+
+	-- 7th June
+
+5. Create web page, WAP page and App screen (android) which will contain following and will be similar
+ a. menu of content types (home, audio, video, radio stations, books, games). Clicking individual menu links will populate
+the content area with 3 results. If its audio/video, it will give an option to play or download. If its radio station, it will have
+only play option. If its games or book, it will have only download option
+ b. search bar -> will return search result in the content area with type, play and download links
+ c. There will be 2 places where we can show banner ad
+ d. we should also be able to showcase in-stream ads for radio stations. These ads should be configurable
+
+	-- 10th June
+
+6. reporting -> No. of plays and downloads of various items. No. of ads served
+
+	-- 11th June
+
+7. Installations on AWS with installation document (containing step-by-step process, folders, etc). Git hub repository matching 
+AWS folders. Codebase, binaries, sample content and metadata
+
+	-- Parallely with above
 
 
