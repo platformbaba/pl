@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<ices:Configuration
+xmlns:ices="http://www.icecast.org/projects/ices">
+
+<Playlist>
+<!-- File>/home/ice/srv/playlist.pls</File -->
+<!-- Type>builtin</Type-->
+<!--Type>perl</Type-->
+<Type>python</Type>
+<Module>@@@CHANNEL_NAME@@@</Module>
+</Playlist>
+
+
+<Execution>
+<Background>1</Background>
+<Verbose>1</Verbose>
+<BaseDirectory>/home/ice/srv/share/icecast/2/</BaseDirectory>
+</Execution>
+
+<Stream>
+<Server>
+<Hostname>localhost</Hostname>
+<Port>8000</Port>
+<Password>hackme</Password>
+<Protocol>http</Protocol>
+</Server>
+
+<Mountpoint>/@@@CHANNEL_NAME@@@</Mountpoint>
+<Dumpfile>dump</Dumpfile>
+<Name>@@@CHANNEL_NAME@@@</Name>
+<Genre>@@@CHANNEL_GENRE@@@</Genre>
+<Description>@@@CHANNEL_DESCRIPTION@@@</Description>
+<URL>http://192.168.64.121:8000/@@@CHANNEL_NAME@@@</URL>
+<Public>0</Public>
+
+<Bitrate>64</Bitrate>
+<Reencode>1</Reencode>
+<Samplerate>44100</Samplerate>
+<Channels>2</Channels>
+</Stream>
+</ices:Configuration>
