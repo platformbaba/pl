@@ -1,0 +1,55 @@
+<dataConfig>
+	<dataSource type="JdbcDataSource"
+   driver="com.mysql.jdbc.Driver"
+   url="jdbc:mysql://192.168.64.52/saregama_db"
+   user="saregama_read" 
+   password="passread@123"/>
+	<document name="content">
+        <entity name="image" transformer="RegexTransformer" query="
+			select im.image_id,image_name,image_file,image_type,format,dimension,content_type,
+				song_name as tag from image_mstr im left join image_map imap on im.image_id=imap.image_id
+				left join image_mstr_config_rel rel on rel.image_id = im.image_id
+				left join image_edit_config erel on rel.config_id = erel.image_edit_id
+				left join song_mstr sm on (sm.song_id = imap.content_id )
+				where im.status=1 and imap.content_type=4
+				union
+				select im.image_id,image_name,image_file,image_type,format,dimension,content_type,banner_name as tag from image_mstr im left join image_map imap on im.image_id=imap.image_id
+				left join image_mstr_config_rel rel on rel.image_id = im.image_id
+				left join image_edit_config erel on rel.config_id = erel.image_edit_id
+				left join banner_mstr sm on (sm.banner_id = imap.content_id )
+				where im.status=1 and imap.content_type=8
+				union
+				select im.image_id,image_name,image_file,image_type,format,dimension,content_type,artist_name as tag from image_mstr im left join image_map imap on im.image_id=imap.image_id
+				left join image_mstr_config_rel rel on rel.image_id = im.image_id
+				left join image_edit_config erel on rel.config_id = erel.image_edit_id
+				left join artist_mstr sm on (sm.artist_id = imap.content_id )
+				where im.status=1 and imap.content_type=13
+				union
+				select im.image_id,image_name,image_file,image_type,format,dimension,imap.content_type,album_name as tag from image_mstr im left join image_map imap on im.image_id=imap.image_id
+				left join image_mstr_config_rel rel on rel.image_id = im.image_id
+				left join image_edit_config erel on rel.config_id = erel.image_edit_id
+				left join album_mstr sm on (sm.album_id = imap.content_id )
+				where im.status=1 and imap.content_type=14
+				union
+				select im.image_id,image_name,image_file,image_type,format,dimension,imap.content_type,video_name as tag 
+				from image_mstr im left join image_map imap on im.image_id=imap.image_id
+				left join image_mstr_config_rel rel on rel.image_id = im.image_id
+				left join image_edit_config erel on rel.config_id = erel.image_edit_id
+				left join video_mstr sm on (sm.video_id = imap.content_id )
+				where im.status=1 and imap.content_type=15
+				union
+				select rel.id as image_id,song_name as image_name,path as image_file,0,format,dimension,0,song_name as tag from 
+				image_song_config_rel rel left join song_mstr sm on rel.song_id=sm.song_id
+				left join image_edit_config con on con.image_edit_id=rel.config_id
+				where
+				rel.status=1 
+				">
+		
+			<field column="image_name" name="name" />
+			<field column="image_file" name="image_file" />
+			<field column="format" name="format" default="" />
+			<field column="dimension" name="dimension" default=""/>
+			<field column="tag" name="tag" default=""/>
+		</entity>
+	</document>
+</dataConfig>

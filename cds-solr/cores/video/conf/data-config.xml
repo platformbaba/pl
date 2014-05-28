@@ -1,0 +1,24 @@
+<dataConfig>
+	<dataSource type="JdbcDataSource"
+   driver="com.mysql.jdbc.Driver"
+   url="jdbc:mysql://192.168.64.52/saregama_db"
+   user="saregama_read" 
+   password="passread@123"/>
+	<document name="content">
+        <entity name="video" transformer="RegexTransformer" query="
+			SELECT mstr.video_id,video_name,language_id,group_concat(tag_name) as tags,video_file
+			FROM saregama_db.video_mstr mstr left join video_tags vt on vt.video_id=mstr.video_id
+			left join tags_mstr tm on tm.tag_id = vt.tag_id 
+			where
+			mstr.status=1
+			group by mstr.video_id
+			">
+		
+			<field column="video_id" name="id" />
+			<field column="video_name" name="name" />
+			<field column="video_file" name="video_file" />
+			<field column="language_id" name="language_id" default="" />
+			<field column="tags" name="tags" sourceColName="tags" splitBy="," default="" />
+		</entity>
+	</document>
+</dataConfig>

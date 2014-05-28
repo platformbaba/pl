@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<schema name="audio_schema" version="1.1">
+  <types>
+   <fieldtype name="string"  class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
+   <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
+   <fieldType name="int" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="AutoSuggestField" class="solr.TextField" omitNorms="true">
+		
+		<analyzer type="index">
+				<tokenizer class="solr.StandardTokenizerFactory"/>
+				<filter class="solr.TrimFilterFactory"/>
+				<filter class="solr.LowerCaseFilterFactory"/>
+				<filter class="solr.EdgeNGramFilterFactory" minGramSize="2" maxGramSize="15"/>
+		</analyzer>
+
+		<analyzer type="query">
+			<tokenizer class="solr.StandardTokenizerFactory"/>
+			<filter class="solr.TrimFilterFactory"/>
+			<filter class="solr.LowerCaseFilterFactory"/>
+		</analyzer>
+
+	</fieldType>
+	
+	 <fieldType name="SearchField" class="solr.TextField" omitNorms="true">
+		
+		<analyzer type="index">
+			<tokenizer class="solr.StandardTokenizerFactory"/>
+			<filter class="solr.TrimFilterFactory"/>
+			<filter class="solr.LowerCaseFilterFactory"/>
+			<filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+		</analyzer>
+
+		<analyzer type="query">
+			<tokenizer class="solr.StandardTokenizerFactory"/>
+			<filter class="solr.TrimFilterFactory"/>
+			<filter class="solr.LowerCaseFilterFactory"/>
+		</analyzer>
+
+	</fieldType>
+ 
+  </types>
+
+ <fields>   
+ 
+ 
+ 
+  <!-- general -->
+  <field name="id"        type="long"   indexed="true"  stored="true"  multiValued="false" required="true"/>
+  <field name="name"      type="SearchField"   indexed="true"  stored="true" /> 
+  <field name="language_id"      type="int"   indexed="true"  stored="true" /> 
+  <field name="isrc"     type="string"  stored="true"/>
+  <field name="albums"     type="string"   indexed="true"  stored="true" multiValued="true" /> 
+  <field name="artists" type="string" indexed="true" stored="true" multiValued="true" />
+  <field name="tags" type="string" indexed="true" stored="true" multiValued="true" />
+  <field name="playlist_ids" type="int" indexed="true" stored="true" multiValued="true" />
+
+  
+  
+  <!-- searchable fields -->
+  <field name="q" type="SearchField" indexed="true"  multiValued="true" stored="false" />
+  
+  <field name="_version_" type="long"     indexed="true"  stored="true"/>
+  <field name="aq" type="AutoSuggestField" indexed="true" stored="false"/>
+ </fields>
+
+ <!-- field to use to determine and enforce document uniqueness. -->
+ <uniqueKey>id</uniqueKey>
+
+	<copyField source="name" dest="q"/>
+	<copyField source="albums" dest="q"/>
+	<copyField source="artists" dest="q"/>
+	<copyField source="name" dest="aq"/>
+ 
+ <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
+ <solrQueryParser defaultOperator="OR"/>
+</schema>
+

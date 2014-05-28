@@ -1,0 +1,23 @@
+<dataConfig>
+	<dataSource type="JdbcDataSource"
+   driver="com.mysql.jdbc.Driver"
+   url="jdbc:mysql://192.168.64.52/saregama_db"
+   user="saregama_read" 
+   password="passread@123"/>
+	<document name="content">
+        <entity name="album" transformer="RegexTransformer" query="
+			select alb_mstr.album_id as id, alb_mstr.album_name as name , alb_mstr.language_id as language_id,
+			GROUP_CONCAT(DISTINCT art_mstr.artist_name) as artists
+			from saregama_db.album_mstr alb_mstr 
+			left join saregama_db.artist_album art_alb on art_alb.album_id = alb_mstr.album_id
+			left join saregama_db.artist_mstr art_mstr on art_mstr.artist_id = art_alb.artist_id
+			where alb_mstr.status=1
+			group by alb_mstr.album_id">
+		
+			<field column="id" name="id" />
+			<field column="name" name="name" />
+			<field column="langugage_id" name="langugage_id" />
+			<field column="artists" name="artists" sourceColName="artists" splitBy="," default=""/>
+		</entity>
+	</document>
+</dataConfig>

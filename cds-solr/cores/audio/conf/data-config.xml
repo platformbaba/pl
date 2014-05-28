@@ -1,0 +1,37 @@
+<dataConfig>
+	<dataSource type="JdbcDataSource"
+   driver="com.mysql.jdbc.Driver"
+   url="jdbc:mysql://192.168.64.52/saregama_db"
+   user="saregama_read" 
+   password="passread@123"/>
+	<document name="content">
+        <entity name="song" transformer="RegexTransformer" query="
+			SELECT sng_mstr.song_id, sng_mstr.song_name, sng_mstr.isrc,
+			GROUP_CONCAT(DISTINCT alb_mstr.album_name) as album_name,
+			GROUP_CONCAT(DISTINCT art_mstr.artist_name) as audio_artists ,
+			GROUP_CONCAT(DISTINCT CONCAT(tags_mstr2.tag_name,'@@',tags_mstr1.tag_name)) as tags,
+			GROUP_CONCAT(DISTINCT pl_mstr.playlist_id) as playlist_ids,
+			sng_mstr.language_id as language_id
+			FROM saregama_db.song_mstr sng_mstr left join saregama_db.song_album sng_alb on sng_alb.song_id=sng_mstr.song_id
+			left join saregama_db.album_mstr alb_mstr on ( alb_mstr.album_id=sng_alb.album_id and alb_mstr.status =1 )
+			left join saregama_db.artist_song art_sng on ( art_sng.song_id = sng_mstr.song_id)
+			left join saregama_db.artist_mstr art_mstr on (art_sng.artist_id = art_mstr.artist_id and art_mstr.status=1)
+			left join saregama_db.language_mstr lng_mstr on (lng_mstr.language_id = sng_mstr.language_id)
+			left join saregama_db.song_tags sng_tags on (sng_tags.song_id = sng_mstr.song_id)
+			left join saregama_db.tags_mstr tags_mstr1 on (sng_tags.tag_id = tags_mstr1.tag_id)
+			left join saregama_db.tags_mstr tags_mstr2 on (tags_mstr1.parent_tag_id = tags_mstr2.tag_id)
+			left join saregama_db.playlist_song pl_sng on (pl_sng.song_id =sng_mstr.song_id)
+			left join saregama_db.playlist_mstr pl_mstr on(pl_mstr.playlist_id=pl_sng.playlist_id and pl_mstr.status=1)
+			where sng_mstr.status =1 group by sng_mstr.song_id">
+		
+		
+            <field column="song_id" name="id" />
+			<field column="song_name" name="name" />
+			<field column="isrc" name="isrc" />
+			<field column="album_name" name="albums" sourceColName="album_name" splitBy="," default="" />
+			<field column="audio_artists" name="artists" sourceColName="audio_artists" splitBy="," default="" />
+			<field column="tags" name="tags" sourceColName="tags" splitBy="," default=""/>
+			<field column="playlist_ids" name="playlist_ids" sourceColName="playlist_ids" splitBy="," default=""/>
+		</entity>
+	</document>
+</dataConfig>
