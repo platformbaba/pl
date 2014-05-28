@@ -51,4 +51,6 @@ AWS folders. Codebase, binaries, sample content and metadata
 
 	-- Parallely with above
 
+Afer every 2 days will give you an update about current status.
 
+ 
