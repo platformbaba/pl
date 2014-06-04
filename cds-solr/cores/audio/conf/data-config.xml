@@ -1,9 +1,9 @@
 <dataConfig>
 	<dataSource type="JdbcDataSource"
    driver="com.mysql.jdbc.Driver"
-   url="jdbc:mysql://192.168.64.52/saregama_db"
-   user="saregama_read" 
-   password="passread@123"/>
+   url="jdbc:mysql://localhost/saregama_db"
+   user="root" 
+   password="root"/>
 	<document name="content">
         <entity name="song" transformer="RegexTransformer" query="
 			SELECT sng_mstr.song_id, sng_mstr.song_name, sng_mstr.isrc,
