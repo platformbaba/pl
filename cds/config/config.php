@@ -1,5 +1,5 @@
 <?php
-define('DBMASTERIP',"192.168.64.52");
+define('DBMASTERIP',"localhost");
 define('DBMASTERPORT',"3306");
 define('DBMASTERUSERNAME',"saregama_read");
 define('DBMASTERPASSWORD',"passread@123");
@@ -23,7 +23,7 @@ $dbSlavePort	 = "";
 $dbSlaveUserName = "";
 $dbSlavePassword = "";
 
-$solrIp	  = "192.168.64.122";
+$solrIp	  = "localhost";
 $solrPort = "8080";
 #$solrAutoSuggestUrl="/solr/autosuggest/";
 #$solrAutoAudioUrl="/solr/audio/";

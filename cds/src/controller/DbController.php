@@ -8,7 +8,7 @@ class DbController extends AbstractController{
 	
 	public function __construct(){
 		global $messenger;
-		$this->oMysqli = new mysqliDb('cmsdb');
+		$this->oMysqli = new mysqliDb();
 		$this->messenger =&$messenger;
 	}
 
