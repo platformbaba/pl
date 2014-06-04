@@ -3,7 +3,7 @@
    driver="com.mysql.jdbc.Driver"
    url="jdbc:mysql://localhost/saregama_db"
    user="root" 
-   password="root"/>
+   password=""/>
 	<document name="content">
         <entity name="song" transformer="RegexTransformer" query="
 			SELECT sng_mstr.song_id, sng_mstr.song_name, sng_mstr.isrc,
