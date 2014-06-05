@@ -16,6 +16,7 @@ class audio_solr extends base_solr{
 		$query = $this->messenger['query']['queryS'];
 		$query	  = "aq:".urlencode($query);
 		$qType = $this->messenger["query"]["criteria"];
+
 		$response = $this->solr->search( $query,$start,$limit,array('fq' => $qType) );
 		$found    = $response->response->numFound;
 		$resFetch=$response->getRawResponse();
