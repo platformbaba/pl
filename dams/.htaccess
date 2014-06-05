@@ -6,3 +6,5 @@ RewriteRule ^(.*)$ index.php?q=$1 [NC,L,QSA]
 
 php_value upload_max_filesize 5120M
 php_value post_max_size 5120M
+php_value short_open_tag 1
+php_value allow_url_fopen 1
