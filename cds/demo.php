@@ -60,6 +60,24 @@ Video
 </tr>
 </table> 
 
+<div id="content">
+		User Agent: <b> <?php echo htmlspecialchars($ua); ?> </b>
+		<ul>
+			<li>ID: <?php echo $requestingDevice->id; ?> </li>
+			<li>Brand Name: <?php echo $requestingDevice->getCapability('brand_name'); ?> </li>
+			<li>Model Name: <?php echo $requestingDevice->getCapability('model_name'); ?> </li>
+			<li>Marketing Name: <?php echo $requestingDevice->getCapability('marketing_name'); ?> </li>
+			<li>Preferred Markup: <?php echo $requestingDevice->getCapability('preferred_markup'); ?> </li>
+			<li>Resolution Width: <?php echo $requestingDevice->getCapability('resolution_width'); ?> </li>
+			<li>Resolution Height: <?php echo $requestingDevice->getCapability('resolution_height'); ?> </li>
+		</ul>
+		<p><b>Query WURFL by providing the user agent:</b></p>
+		<form method="get" action="index.php">
+			<div>User Agent: <input type="text" name="ua" size="100" value="<?php echo isset($_GET['ua'])? htmlspecialchars($_GET['ua']): ''; ?>" />
+			<input type="submit" /></div>
+		</form>
+	</div>
+
 <script>
 	$.get( "/cds/audio?actiontype=get_all_audio&start=0&limit=10", function( data ) {
 		alert( data );
