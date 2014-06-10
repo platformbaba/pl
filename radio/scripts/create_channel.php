@@ -2,14 +2,14 @@
 
 
 require_once "./../config.php";
-$ices_bin = "/home/ices/bin";
+$ices_bin = "/home/ec2-user/radio/ices/bin/";
 $icecast_server_ip="";
 $icecast_server_port="";
-$ices_modules_dir="/home/ice/srv/etc/modules/";
-$ices_conf_dir="/home/ice/srv/etc/stubs/";
+$ices_modules_dir="/home/ec2-user/radio/ices/etc/modules/";
+$ices_conf_dir="/home/ec2-user/radio/ices/etc/";
 
-$channel_id = 21;
-$channel_name = "new_channel";
+$channel_id = 42;
+$channel_name = "channel_42";
 
 $template = file_get_contents("../templates/ices_temp.tmpl");
 $template = str_replace("@@@CHANNEL_NAME@@@",$channel_name,$template);
